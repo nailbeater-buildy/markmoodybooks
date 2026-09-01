@@ -5,16 +5,16 @@
    ============================================================ */
 
 :root {
-  --paper:      #F3ECDA;   /* page ground */
-  --raised:     #FAF6EA;   /* alternating section ground */
-  --ink:        #211D16;   /* headings, buttons, hard rules */
-  --soft-ink:   #5B5347;   /* body copy */
-  --muted:      #8A8171;   /* captions, fine print */
-  --brass:      #A9812E;   /* eyebrows, spine accent */
-  --brass-dark: #7C5F22;   /* links, book subtitles */
-  --oxide:      #7A3B2E;   /* accent only: notes, mission CTA */
-  --rule:       #D9CFB4;   /* minor 1px rules */
-  --rule-dark:  #C6B189;   /* field + quiet-button borders */
+  --paper:      #F4F2ED;   /* page ground */
+  --raised:     #FBFAF7;   /* alternating section ground */
+  --ink:        #1A1614;   /* headings, buttons, hard rules */
+  --soft-ink:   #4E4844;   /* body copy */
+  --muted:      #8C857E;   /* captions, fine print */
+  --oxblood:    #5A1F1C;   /* THE one colour: rules, links, buttons, the field */
+  --oxblood-lt: #7A2E28;   /* book subtitles, small emphasis */
+  --radius:     3px;       /* buttons, fields, photographs — never covers */
+  --rule:       #DDD8CE;   /* minor 1px rules */
+  --rule-dark:  #CFC7B9;   /* field + quiet-button borders */
 
   --serif: Spectral, Georgia, "Times New Roman", serif;
   --sans:  "Source Sans 3", system-ui, -apple-system, sans-serif;
@@ -49,20 +49,20 @@ body {
   background: var(--rule);
   pointer-events: none;
 }
-.spine::after {           /* the brass segment beside the hero */
+.spine::after {           /* the oxblood segment beside the hero */
   content: "";
   position: absolute;
   top: 120px; left: -1px;
   width: 3px; height: 180px;
-  background: var(--brass);
+  background: var(--oxblood);
 }
 
 img { max-width: 100%; }
 
-a { color: var(--brass-dark); text-decoration: none; }
-a:hover { color: var(--oxide); }
-:focus-visible { outline: 2px solid var(--oxide); outline-offset: 2px; }
-::selection { background: rgba(169,129,46,.22); }
+a { color: var(--oxblood); text-decoration: none; }
+a:hover { color: var(--oxblood); }
+:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 2px; }
+::selection { background: rgba(90,31,28,.14); }
 
 h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; }
 p  { margin: 0 0 18px; }
@@ -75,10 +75,10 @@ em { font-style: italic; }
   margin: 0 0 12px;
   font-size: 11px; font-weight: 600;
   letter-spacing: .2em; text-transform: uppercase;
-  color: var(--brass);
+  color: var(--oxblood);
 }
 .eyebrow { margin-bottom: 26px; letter-spacing: .18em; font-size: 12px; }
-.book-label-red { color: var(--oxide); }
+.book-label-red { color: var(--oxblood); }
 
 section > h2,
 .section-head h2,
@@ -95,24 +95,27 @@ section > h2,
 .btn {
   display: inline-block;
   padding: 11px 22px;
-  border: 1px solid var(--ink);
-  color: var(--ink);
+  border: 1px solid var(--oxblood);
+  color: var(--oxblood);
   font-size: 14px; font-weight: 600; letter-spacing: .04em;
   background: none;
+  border-radius: var(--radius);
+  transition: background-color .12s ease, border-color .12s ease, color .12s ease;
 }
-.btn:hover        { background: var(--ink); color: var(--raised); }
-.btn-solid        { background: var(--ink); color: var(--raised); }
-.btn-solid:hover  { background: var(--oxide); border-color: var(--oxide); color: var(--raised); }
-.btn-red          { background: var(--oxide); border-color: var(--oxide); color: var(--raised); }
+.btn:hover        { background: var(--oxblood); color: var(--raised); }
+.btn-solid        { background: var(--oxblood); border-color: var(--oxblood); color: var(--raised); }
+.btn-solid:hover  { background: var(--ink); border-color: var(--ink); color: var(--raised); }
+.btn-red          { background: var(--oxblood); border-color: var(--oxblood); color: var(--raised); } /* alias of .btn-solid */
 .btn-red:hover    { background: var(--ink); border-color: var(--ink); }
-.btn-quiet        { border-color: var(--rule-dark); color: var(--brass-dark); }
+.btn-quiet        { border-color: var(--rule-dark); color: var(--oxblood); }
 .btn-quiet:hover  { background: none; border-color: var(--ink); color: var(--ink); }
 
 .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 
 /* photographs print black and white */
 figure img,
-.crop img { filter: grayscale(1) contrast(1.04); }
+.crop img { filter: grayscale(1) contrast(1.06); border-radius: var(--radius); }
+.crop { border-radius: var(--radius); }
 figcaption {
   margin-top: 10px;
   font-family: var(--serif); font-style: italic;
@@ -125,7 +128,7 @@ figcaption {
   display: flex; align-items: flex-end; justify-content: space-between;
   max-width: var(--page); margin: 0 auto;
   padding: 40px var(--margin-r) 20px var(--margin-l);
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--oxblood);
   margin-bottom: 0;
 }
 .wordmark {
@@ -138,7 +141,7 @@ figcaption {
   font-size: 15px; color: var(--soft-ink);
   border-bottom: 1px solid transparent;
 }
-.site-nav a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
+.site-nav a:hover { color: var(--oxblood); border-bottom-color: var(--oxblood); }
 
 /* ---------- hero -------------------------------------------- */
 
@@ -172,7 +175,7 @@ figcaption {
 
 .book, .guide { display: grid; grid-template-columns: 224px 1fr; gap: 56px; }
 .book { padding: 56px 0; }
-.book:first-of-type { padding-top: 0; }
+.book:first-of-type { padding-top: 0; padding-bottom: 56px; }
 
 /* the cover: printed edge shadow + a subtle spine down the left */
 .cover { position: relative; align-self: start; }
@@ -184,12 +187,13 @@ figcaption {
 .cover::after {                        /* the spine gradient */
   content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 9px;
   background: linear-gradient(90deg,
-    rgba(33,29,22,.45), rgba(33,29,22,.05) 60%, rgba(250,246,234,.28));
+    rgba(26,22,20,.45), rgba(26,22,20,.05) 60%, rgba(255,255,255,.28));
 }
 .cover img {
   position: relative; display: block; width: 100%; height: auto;
-  box-shadow: 0 0 0 1px rgba(33,29,22,.22);
+  box-shadow: 0 0 0 1px rgba(26,22,20,.22);
   filter: none;                        /* covers keep their colour */
+  border-radius: 0;                    /* a book board has no round corners */
 }
 
 .book-body h3 { font-size: 40px; line-height: 1.1; letter-spacing: -.012em; }
@@ -197,12 +201,12 @@ figcaption {
 .book-sub {
   margin: 10px 0 0;
   font-family: var(--serif); font-style: italic;
-  font-size: 21px; line-height: 1.4; color: var(--brass-dark);
+  font-size: 21px; line-height: 1.4; color: var(--oxblood-lt);
 }
 .book-body > p { max-width: 38em; color: var(--soft-ink); }
 .book-body > p:not(.book-sub):not(.book-label) { margin-top: 22px; }
 .book-note {
-  padding-left: 16px; border-left: 3px solid var(--oxide);
+  padding-left: 16px; border-left: 3px solid var(--oxblood);
   max-width: 36em; font-size: 16px; line-height: 1.6; color: var(--ink);
 }
 .book-note a { border-bottom: 1px solid var(--rule-dark); }
@@ -221,15 +225,32 @@ figcaption {
 
 /* ---------- mission ----------------------------------------- */
 
+/* The one place the accent runs as a field. Never use it twice on a page. */
 .mission {
   margin-top: 88px;
-  background: var(--raised);
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
+  background: var(--oxblood);
+  --reverse: #F7F3EC;
 }
+.mission h2   { color: rgba(244,242,237,.62); }
+.mission p,
+.mission dd   { color: rgba(244,242,237,.86); }
+.mission dt,
+.mission figcaption { color: rgba(244,242,237,.6); }
+.mission blockquote p { color: var(--reverse); font-size: 38px; line-height: 1.28; }
+.mission cite { color: rgba(244,242,237,.66); }
+.mission figcaption a { color: var(--reverse); border-bottom-color: rgba(244,242,237,.45); }
+.mission .crop img { filter: grayscale(1) contrast(1.1) brightness(1.04); }
+.mission .btn-red {                       /* primary reverses out */
+  background: var(--reverse); border-color: var(--reverse); color: var(--oxblood);
+}
+.mission .btn-red:hover { background: var(--ink); border-color: var(--ink); color: var(--reverse); }
+.mission .btn {                           /* outline reverses out */
+  border-color: rgba(244,242,237,.5); color: var(--reverse);
+}
+.mission .btn:hover { border-color: var(--reverse); background: rgba(244,242,237,.12); color: var(--reverse); }
 .mission .inner {
   max-width: var(--page); margin: 0 auto;
-  padding: 64px var(--margin-r) 64px var(--margin-l);
+  padding: 72px var(--margin-r) 76px var(--margin-l);
 }
 .mission h2 { margin-bottom: 44px; }
 .mission-grid { display: grid; grid-template-columns: 1fr 392px; gap: 64px; align-items: start; }
@@ -237,21 +258,19 @@ figcaption {
 .mission blockquote p {
   margin: 0;
   font-family: var(--serif); font-weight: 300; font-style: italic;
-  font-size: 34px; line-height: 1.32; color: var(--ink);
 }
 .mission cite {
-  display: block; margin-top: 18px; font-style: normal;
+  display: block; margin-top: 20px; font-style: normal;
   font-size: 13px; font-weight: 600; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--brass);
+  text-transform: uppercase;
 }
-.mission p { max-width: 38em; color: var(--soft-ink); }
+.mission p { max-width: 38em; }
 .roles {
   margin: 0 0 30px;
   display: grid; grid-template-columns: auto 1fr; gap: 8px 20px;
   max-width: 34em; font-size: 16px;
 }
-.roles dt { color: var(--muted); }
-.roles dd { margin: 0; color: var(--ink); }
+.roles dt, .roles dd { margin: 0; }
 .mission-photo { margin: 0; }
 .mission-photo .crop { overflow: hidden; height: 308px; }
 .mission-photo .crop img {
@@ -260,7 +279,7 @@ figcaption {
   transform: scale(1.42); transform-origin: 44% 40%;
   filter: grayscale(1) contrast(1.05);
 }
-.mission-photo figcaption a { border-bottom: 1px solid var(--rule-dark); }
+.mission-photo figcaption a { border-bottom: 1px solid; }
 
 /* ---------- about ------------------------------------------- */
 
@@ -282,7 +301,7 @@ figcaption {
 
 /* ---------- contact ----------------------------------------- */
 
-.contact { background: var(--raised); border-top: 2px solid var(--ink); }
+.contact { background: var(--raised); border-top: 2px solid var(--oxblood); }
 .contact-grid {
   display: grid; grid-template-columns: 1fr 452px; gap: 80px; align-items: start;
   max-width: var(--page); margin: 0 auto;
@@ -302,21 +321,22 @@ figcaption {
 }
 .field input, .field textarea {
   padding: 12px 14px;
-  border: 1px solid var(--rule-dark); border-radius: 0;
-  background: var(--paper);
+  border: 1px solid var(--rule-dark); border-radius: var(--radius);
+  background: var(--raised);
   font-family: var(--sans); font-size: 16px; color: var(--ink);
 }
 .field textarea { resize: vertical; }
 .field input:focus, .field textarea:focus { border-color: var(--ink); outline: none; }
 .contact button {
   align-self: flex-start;
+  transition: background-color .12s ease, border-color .12s ease;
   padding: 13px 30px;
-  border: 1px solid var(--ink); border-radius: 0;
-  background: var(--ink); color: var(--raised);
+  border: 1px solid var(--ink); border-radius: var(--radius);
+  background: var(--oxblood); color: var(--raised);
   font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .06em;
   cursor: pointer;
 }
-.contact button:hover { background: var(--oxide); border-color: var(--oxide); }
+.contact button:hover { background: var(--ink); border-color: var(--ink); }
 
 /* ---------- Lantern Watch ----------------------------------- */
 
@@ -348,7 +368,7 @@ figcaption {
   display: flex; justify-content: space-between; align-items: baseline;
   max-width: var(--page); margin: 0 auto;
   padding: 26px var(--margin-r) 40px var(--margin-l);
-  border-top: 2px solid var(--ink);
+  border-top: 2px solid var(--oxblood);
   font-size: 14px; color: var(--muted);
 }
 .site-footer a { border-bottom: 1px solid var(--rule-dark); }
@@ -370,7 +390,7 @@ figcaption {
     width: 100%;
     flex-wrap: wrap; gap: 8px 20px;
     padding: 12px 0 16px;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--oxblood);
     border-bottom: 1px solid var(--rule);
   }
   .site-nav a { font-size: 14px; }
@@ -397,7 +417,7 @@ figcaption {
   .guide { margin: 0 calc(-1 * var(--margin-r)) 0 calc(-1 * var(--margin-l)); padding: 28px var(--margin-r) 30px var(--margin-l); }
   .all-books { flex-direction: column; gap: 12px; padding-bottom: 30px; }
 
-  .mission blockquote p { font-size: 24px; line-height: 1.36; }
+  .mission blockquote p { font-size: 26px; line-height: 1.34; }
   .mission-photo { order: -1; }
   .mission-photo .crop, .mission-photo .crop img { height: 200px; }
   .mission-photo .crop img { transform: scale(1.5); }

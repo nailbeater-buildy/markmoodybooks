@@ -52,11 +52,11 @@ Each book is one `<article class="book">` block inside `<section id="books">` in
 a `<div class="book-body">` with the label, title, subtitle, blurb, and links.
 
 1. Save the cover art into `assets/` (e.g. `assets/new-book-title.jpg`).
-2. Copy an existing `<article class="book">` block, paste it above the
-   `<hr class="rule">` that sits before the `.all-books` row.
-3. Update the image `src`, the label ("Book Four"), title, subtitle, blurb, and
-   the two Amazon links. Delete the `.book-note` / `.book-fine` lines if the new
-   book has none.
+2. Books run newest first. Copy an existing `<article class="book">` block and
+   paste it at the **top** of the list (just under the `<!-- Books run newest
+   first -->` comment).
+3. Update the image `src`, the label, title, subtitle, blurb, and the two Amazon
+   links. Delete the `.book-note` / `.book-fine` lines if the new book has none.
 
 Keep the link pattern: `btn btn-solid` for the primary buy link, plain `btn` for
 the secondary one, `btn-quiet` for a soft tertiary link.
