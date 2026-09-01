@@ -1,0 +1,7 @@
+# Local-only project notes for Claude — never publish
+CLAUDE.md
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp

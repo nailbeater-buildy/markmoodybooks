@@ -1,0 +1,350 @@
+/* ============================================
+   Tokens
+   ============================================ */
+:root {
+  --paper: #F3ECDA;
+  --paper-raised: #FAF6EA;
+  --ink: #211D16;
+  --ink-soft: #5B5347;
+  --brass: #A9812E;
+  --brass-dark: #7C5F22;
+  --oxide: #7A3B2E;
+  --rule: #D9CFB4;
+
+  --serif: 'Spectral', Georgia, 'Times New Roman', serif;
+  --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --max-w: 640px;
+  --gutter: 88px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+p { margin: 0 0 1.1em; }
+
+a {
+  color: var(--brass-dark);
+  text-decoration-color: var(--brass);
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--oxide); }
+
+em { font-style: italic; }
+
+/* ============================================
+   Structural spine — the signature element
+   ============================================ */
+.spine {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--gutter) - 2px);
+  width: 1px;
+  background: var(--rule);
+  z-index: 0;
+}
+
+@media (max-width: 780px) {
+  :root { --gutter: 28px; }
+  .spine { display: none; }
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.site-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 32px var(--gutter) 24px;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-nav a {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  margin-left: 22px;
+}
+.site-nav a:first-child { margin-left: 0; }
+.site-nav a:hover { color: var(--oxide); }
+
+/* ============================================
+   Sections (general)
+   ============================================ */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  padding: 56px var(--gutter) 56px calc(var(--gutter) + 40px);
+  max-width: calc(var(--max-w) + var(--gutter) + 40px);
+}
+
+@media (max-width: 780px) {
+  section { padding: 44px 24px; max-width: 100%; }
+}
+
+section h2 {
+  font-size: 1.7rem;
+  position: relative;
+  margin-bottom: 1em;
+}
+
+section h2::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 0.5em;
+  width: 24px;
+  height: 1px;
+  background: var(--brass);
+}
+
+@media (max-width: 780px) {
+  section h2::before { display: none; }
+}
+
+/* ============================================
+   Hero
+   ============================================ */
+.hero {
+  padding-top: 72px;
+  padding-bottom: 64px;
+}
+
+.hero-eyebrow {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-bottom: 0.6em;
+}
+
+.hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.1rem);
+  max-width: 11ch;
+  margin-bottom: 0.5em;
+}
+
+.hero-lede {
+  max-width: var(--max-w);
+  color: var(--ink-soft);
+  font-size: 1.08rem;
+}
+
+/* ============================================
+   Books
+   ============================================ */
+.book {
+  border-top: 1px solid var(--rule);
+  padding: 40px 0;
+  max-width: var(--max-w);
+}
+
+.book:last-of-type { border-bottom: 1px solid var(--rule); }
+
+.book-label {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--brass-dark);
+  margin-bottom: 0.3em;
+  font-size: 0.95rem;
+}
+
+.book h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.15em;
+}
+
+.book-sub {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  margin-bottom: 0.9em;
+}
+
+.book-note {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.book-fine {
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+  margin-top: 1.2em;
+  margin-bottom: 0;
+}
+
+.book-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 18px 0 6px;
+}
+
+.all-books {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--paper-raised);
+  background: var(--ink);
+  padding: 10px 18px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.btn:hover { background: var(--oxide); color: var(--paper-raised); }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--brass-dark);
+  border: 1px solid var(--rule);
+}
+.btn-quiet:hover {
+  background: transparent;
+  color: var(--oxide);
+  border-color: var(--oxide);
+}
+
+/* ============================================
+   Mission
+   ============================================ */
+.mission blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--ink);
+  border-left: 2px solid var(--brass);
+  padding-left: 24px;
+  margin: 0 0 1.4em;
+  max-width: var(--max-w);
+}
+
+.mission blockquote cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+.mission p { max-width: var(--max-w); }
+
+.mission-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* ============================================
+   About
+   ============================================ */
+.about p { max-width: var(--max-w); }
+
+/* ============================================
+   Contact
+   ============================================ */
+.contact p { max-width: var(--max-w); }
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  margin-top: 24px;
+}
+
+.contact-form label {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+  margin-top: 16px;
+}
+.contact-form label:first-of-type { margin-top: 0; }
+
+.contact-form input,
+.contact-form textarea {
+  font-family: var(--sans);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+
+.contact-form button {
+  margin-top: 20px;
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  padding: 32px var(--gutter) 48px calc(var(--gutter) + 40px);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 780px) {
+  .site-footer { padding: 24px 24px 40px; }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
