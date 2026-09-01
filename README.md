@@ -8,7 +8,8 @@ hosted on GitHub Pages.
 | File | What it is |
 | --- | --- |
 | `index.html` | The whole site (one page, anchor-linked sections) |
-| `styles.css` | All styling |
+| `styles.css` | All styling. Every colour and size lives in `:root` at the top. |
+| `assets/` | Book covers and photos (JPEG) |
 | `CNAME` | Tells GitHub Pages the custom domain |
 
 Edit `index.html` / `styles.css`, commit, push. The live site updates within a
@@ -46,6 +47,16 @@ activate. To change the destination address or add spam filtering, log in at
 
 ## Adding a new book
 
-Each book is one `<article class="book">` block in `index.html`. Copy the last
-one, update the label, title, description, and Amazon link(s), paste it below
-the others. Nothing else needs to change.
+Each book is one `<article class="book">` block inside `<section id="books">` in
+`index.html`. It has two parts: a `<div class="cover">` with the cover image and
+a `<div class="book-body">` with the label, title, subtitle, blurb, and links.
+
+1. Save the cover art into `assets/` (e.g. `assets/new-book-title.jpg`).
+2. Copy an existing `<article class="book">` block, paste it above the
+   `<hr class="rule">` that sits before the `.all-books` row.
+3. Update the image `src`, the label ("Book Four"), title, subtitle, blurb, and
+   the two Amazon links. Delete the `.book-note` / `.book-fine` lines if the new
+   book has none.
+
+Keep the link pattern: `btn btn-solid` for the primary buy link, plain `btn` for
+the secondary one, `btn-quiet` for a soft tertiary link.

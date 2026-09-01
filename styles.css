@@ -1,24 +1,31 @@
-/* ============================================
-   Tokens
-   ============================================ */
+/* ============================================================
+   markmoodybooks.com
+   One stylesheet. No framework, no build step.
+   Everything that changes the look lives in :root below.
+   ============================================================ */
+
 :root {
-  --paper: #F3ECDA;
-  --paper-raised: #FAF6EA;
-  --ink: #211D16;
-  --ink-soft: #5B5347;
-  --brass: #A9812E;
-  --brass-dark: #7C5F22;
-  --oxide: #7A3B2E;
-  --rule: #D9CFB4;
+  --paper:      #F3ECDA;   /* page ground */
+  --raised:     #FAF6EA;   /* alternating section ground */
+  --ink:        #211D16;   /* headings, buttons, hard rules */
+  --soft-ink:   #5B5347;   /* body copy */
+  --muted:      #8A8171;   /* captions, fine print */
+  --brass:      #A9812E;   /* eyebrows, spine accent */
+  --brass-dark: #7C5F22;   /* links, book subtitles */
+  --oxide:      #7A3B2E;   /* accent only: notes, mission CTA */
+  --rule:       #D9CFB4;   /* minor 1px rules */
+  --rule-dark:  #C6B189;   /* field + quiet-button borders */
 
-  --serif: 'Spectral', Georgia, 'Times New Roman', serif;
-  --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --serif: Spectral, Georgia, "Times New Roman", serif;
+  --sans:  "Source Sans 3", system-ui, -apple-system, sans-serif;
 
-  --max-w: 640px;
-  --gutter: 88px;
+  --page:      1280px;  /* content max width */
+  --margin-l:  152px;   /* left margin (spine sits at 96px) */
+  --margin-r:  120px;
+  --spine-x:    96px;
 }
 
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
@@ -28,323 +35,382 @@ body {
   color: var(--ink);
   font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
 }
 
-h1, h2, h3 {
-  font-family: var(--serif);
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.15;
-  margin: 0 0 0.5em;
-}
-
-p { margin: 0 0 1.1em; }
-
-a {
-  color: var(--brass-dark);
-  text-decoration-color: var(--brass);
-  text-underline-offset: 3px;
-}
-a:hover { color: var(--oxide); }
-
-em { font-style: italic; }
-
-/* ============================================
-   Structural spine — the signature element
-   ============================================ */
+/* The one motif: a thin rule down the left margin, like a book's spine. */
 .spine {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: calc(var(--gutter) - 2px);
+  position: absolute;
+  top: 0; bottom: 0;
+  left: var(--spine-x);
   width: 1px;
   background: var(--rule);
-  z-index: 0;
+  pointer-events: none;
 }
-
-@media (max-width: 780px) {
-  :root { --gutter: 28px; }
-  .spine { display: none; }
-}
-
-/* ============================================
-   Header
-   ============================================ */
-.site-header {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding: 32px var(--gutter) 24px;
-}
-
-.wordmark {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.site-nav a {
-  font-size: 0.92rem;
-  color: var(--ink-soft);
-  text-decoration: none;
-  margin-left: 22px;
-}
-.site-nav a:first-child { margin-left: 0; }
-.site-nav a:hover { color: var(--oxide); }
-
-/* ============================================
-   Sections (general)
-   ============================================ */
-main {
-  position: relative;
-  z-index: 1;
-}
-
-section {
-  padding: 56px var(--gutter) 56px calc(var(--gutter) + 40px);
-  max-width: calc(var(--max-w) + var(--gutter) + 40px);
-}
-
-@media (max-width: 780px) {
-  section { padding: 44px 24px; max-width: 100%; }
-}
-
-section h2 {
-  font-size: 1.7rem;
-  position: relative;
-  margin-bottom: 1em;
-}
-
-section h2::before {
+.spine::after {           /* the brass segment beside the hero */
   content: "";
   position: absolute;
-  left: -40px;
-  top: 0.5em;
-  width: 24px;
-  height: 1px;
+  top: 120px; left: -1px;
+  width: 3px; height: 180px;
   background: var(--brass);
 }
 
-@media (max-width: 780px) {
-  section h2::before { display: none; }
-}
+img { max-width: 100%; }
 
-/* ============================================
-   Hero
-   ============================================ */
-.hero {
-  padding-top: 72px;
-  padding-bottom: 64px;
-}
+a { color: var(--brass-dark); text-decoration: none; }
+a:hover { color: var(--oxide); }
+:focus-visible { outline: 2px solid var(--oxide); outline-offset: 2px; }
+::selection { background: rgba(169,129,46,.22); }
 
-.hero-eyebrow {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--ink-soft);
-  margin-bottom: 0.6em;
-}
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; }
+p  { margin: 0 0 18px; }
+em { font-style: italic; }
 
-.hero h1 {
-  font-size: clamp(2.1rem, 5vw, 3.1rem);
-  max-width: 11ch;
-  margin-bottom: 0.5em;
-}
+/* ---------- shared blocks ------------------------------------ */
 
-.hero-lede {
-  max-width: var(--max-w);
-  color: var(--ink-soft);
-  font-size: 1.08rem;
-}
-
-/* ============================================
-   Books
-   ============================================ */
-.book {
-  border-top: 1px solid var(--rule);
-  padding: 40px 0;
-  max-width: var(--max-w);
-}
-
-.book:last-of-type { border-bottom: 1px solid var(--rule); }
-
+.eyebrow,
 .book-label {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--brass-dark);
-  margin-bottom: 0.3em;
-  font-size: 0.95rem;
+  margin: 0 0 12px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--brass);
+}
+.eyebrow { margin-bottom: 26px; letter-spacing: .18em; font-size: 12px; }
+.book-label-red { color: var(--oxide); }
+
+section > h2,
+.section-head h2,
+.mission h2,
+.lantern h2 {
+  font-size: 15px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink);
 }
 
-.book h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.15em;
-}
+.rule { border: 0; height: 1px; background: var(--rule); margin: 0; }
 
-.book-sub {
-  color: var(--ink-soft);
-  font-size: 0.98rem;
-  margin-bottom: 0.9em;
-}
-
-.book-note {
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-}
-
-.book-fine {
-  font-size: 0.87rem;
-  color: var(--ink-soft);
-  margin-top: 1.2em;
-  margin-bottom: 0;
-}
-
-.book-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  margin: 18px 0 6px;
-}
-
-.all-books {
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* ============================================
-   Buttons
-   ============================================ */
+/* buttons — flush-left labels, zero radius */
 .btn {
   display: inline-block;
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 0.92rem;
-  color: var(--paper-raised);
-  background: var(--ink);
-  padding: 10px 18px;
-  border-radius: 3px;
-  text-decoration: none;
-}
-.btn:hover { background: var(--oxide); color: var(--paper-raised); }
-
-.btn-quiet {
-  background: transparent;
-  color: var(--brass-dark);
-  border: 1px solid var(--rule);
-}
-.btn-quiet:hover {
-  background: transparent;
-  color: var(--oxide);
-  border-color: var(--oxide);
-}
-
-/* ============================================
-   Mission
-   ============================================ */
-.mission blockquote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.3rem;
+  padding: 11px 22px;
+  border: 1px solid var(--ink);
   color: var(--ink);
-  border-left: 2px solid var(--brass);
-  padding-left: 24px;
-  margin: 0 0 1.4em;
-  max-width: var(--max-w);
+  font-size: 14px; font-weight: 600; letter-spacing: .04em;
+  background: none;
 }
+.btn:hover        { background: var(--ink); color: var(--raised); }
+.btn-solid        { background: var(--ink); color: var(--raised); }
+.btn-solid:hover  { background: var(--oxide); border-color: var(--oxide); color: var(--raised); }
+.btn-red          { background: var(--oxide); border-color: var(--oxide); color: var(--raised); }
+.btn-red:hover    { background: var(--ink); border-color: var(--ink); }
+.btn-quiet        { border-color: var(--rule-dark); color: var(--brass-dark); }
+.btn-quiet:hover  { background: none; border-color: var(--ink); color: var(--ink); }
 
-.mission blockquote cite {
-  display: block;
-  font-style: normal;
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--ink-soft);
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+/* photographs print black and white */
+figure img,
+.crop img { filter: grayscale(1) contrast(1.04); }
+figcaption {
   margin-top: 10px;
+  font-family: var(--serif); font-style: italic;
+  font-size: 13px; line-height: 1.5; color: var(--muted);
 }
 
-.mission p { max-width: var(--max-w); }
+/* ---------- masthead ---------------------------------------- */
 
-.mission-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 12px;
+.masthead {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  max-width: var(--page); margin: 0 auto;
+  padding: 40px var(--margin-r) 20px var(--margin-l);
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0;
 }
-
-/* ============================================
-   About
-   ============================================ */
-.about p { max-width: var(--max-w); }
-
-/* ============================================
-   Contact
-   ============================================ */
-.contact p { max-width: var(--max-w); }
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 420px;
-  margin-top: 24px;
-}
-
-.contact-form label {
-  font-size: 0.88rem;
-  color: var(--ink-soft);
-  margin-bottom: 6px;
-  margin-top: 16px;
-}
-.contact-form label:first-of-type { margin-top: 0; }
-
-.contact-form input,
-.contact-form textarea {
-  font-family: var(--sans);
-  font-size: 1rem;
-  padding: 10px 12px;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  background: var(--paper-raised);
+.wordmark {
+  font-family: var(--serif);
+  font-size: 27px; font-weight: 500; letter-spacing: .02em;
   color: var(--ink);
 }
+.site-nav { display: flex; gap: 34px; padding-bottom: 5px; }
+.site-nav a {
+  font-size: 15px; color: var(--soft-ink);
+  border-bottom: 1px solid transparent;
+}
+.site-nav a:hover { color: var(--oxide); border-bottom-color: var(--oxide); }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: 2px solid var(--brass);
-  outline-offset: 1px;
+/* ---------- hero -------------------------------------------- */
+
+.hero {
+  display: grid; grid-template-columns: 1fr 268px; gap: 64px;
+  align-items: start;
+  max-width: var(--page); margin: 0 auto;
+  padding: 64px var(--margin-r) 72px var(--margin-l);
+}
+.hero h1 {
+  font-size: 76px; line-height: 1.02; letter-spacing: -.018em;
+  text-wrap: balance;
+}
+.hero .lede {
+  margin: 34px 0 0; max-width: 33em;
+  font-size: 19px; line-height: 1.66; color: var(--soft-ink);
+}
+.hero-portrait { margin: 0; }
+.hero-portrait img { display: block; width: 100%; height: 300px; object-fit: cover; object-position: 38% 30%; }
+.hero-portrait figcaption { font-size: 12px; }
+
+/* ---------- books ------------------------------------------- */
+
+.books { max-width: var(--page); margin: 0 auto; padding: 0 var(--margin-r) 0 var(--margin-l); }
+.books::before { content: ""; display: block; height: 1px; background: var(--rule); }
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 52px 0 40px;
+}
+.section-head .count { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--muted); }
+
+.book, .guide { display: grid; grid-template-columns: 224px 1fr; gap: 56px; }
+.book { padding: 56px 0; }
+.book:first-of-type { padding-top: 0; }
+
+/* the cover: printed edge shadow + a subtle spine down the left */
+.cover { position: relative; align-self: start; }
+.cover::before {                       /* ink shadow behind the board */
+  content: ""; position: absolute; inset: 0;
+  background: var(--ink); opacity: .16;
+  transform: translate(11px, 14px); filter: blur(11px);
+}
+.cover::after {                        /* the spine gradient */
+  content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 9px;
+  background: linear-gradient(90deg,
+    rgba(33,29,22,.45), rgba(33,29,22,.05) 60%, rgba(250,246,234,.28));
+}
+.cover img {
+  position: relative; display: block; width: 100%; height: auto;
+  box-shadow: 0 0 0 1px rgba(33,29,22,.22);
+  filter: none;                        /* covers keep their colour */
 }
 
-.contact-form button {
-  margin-top: 20px;
+.book-body h3 { font-size: 40px; line-height: 1.1; letter-spacing: -.012em; }
+.book-body h3.h3-small { font-size: 31px; line-height: 1.12; }
+.book-sub {
+  margin: 10px 0 0;
+  font-family: var(--serif); font-style: italic;
+  font-size: 21px; line-height: 1.4; color: var(--brass-dark);
+}
+.book-body > p { max-width: 38em; color: var(--soft-ink); }
+.book-body > p:not(.book-sub):not(.book-label) { margin-top: 22px; }
+.book-note {
+  padding-left: 16px; border-left: 3px solid var(--oxide);
+  max-width: 36em; font-size: 16px; line-height: 1.6; color: var(--ink);
+}
+.book-note a { border-bottom: 1px solid var(--rule-dark); }
+.book-fine { max-width: 40em; font-size: 14px; line-height: 1.62; color: var(--muted); }
+
+/* the study guide sits on the raised ground, edge to edge of the column */
+.guide {
+  padding: 36px 32px 56px 32px;
+  background: var(--raised);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.all-books { display: flex; gap: 36px; padding-top: 28px; font-size: 15px; }
+.all-books a { border-bottom: 1px solid var(--rule-dark); }
+
+/* ---------- mission ----------------------------------------- */
+
+.mission {
+  margin-top: 88px;
+  background: var(--raised);
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.mission .inner {
+  max-width: var(--page); margin: 0 auto;
+  padding: 64px var(--margin-r) 64px var(--margin-l);
+}
+.mission h2 { margin-bottom: 44px; }
+.mission-grid { display: grid; grid-template-columns: 1fr 392px; gap: 64px; align-items: start; }
+.mission blockquote { margin: 0 0 36px; }
+.mission blockquote p {
+  margin: 0;
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: 34px; line-height: 1.32; color: var(--ink);
+}
+.mission cite {
+  display: block; margin-top: 18px; font-style: normal;
+  font-size: 13px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--brass);
+}
+.mission p { max-width: 38em; color: var(--soft-ink); }
+.roles {
+  margin: 0 0 30px;
+  display: grid; grid-template-columns: auto 1fr; gap: 8px 20px;
+  max-width: 34em; font-size: 16px;
+}
+.roles dt { color: var(--muted); }
+.roles dd { margin: 0; color: var(--ink); }
+.mission-photo { margin: 0; }
+.mission-photo .crop { overflow: hidden; height: 308px; }
+.mission-photo .crop img {
+  display: block; width: 100%; height: 308px;
+  object-fit: cover; object-position: 44% 40%;
+  transform: scale(1.42); transform-origin: 44% 40%;
+  filter: grayscale(1) contrast(1.05);
+}
+.mission-photo figcaption a { border-bottom: 1px solid var(--rule-dark); }
+
+/* ---------- about ------------------------------------------- */
+
+.about {
+  max-width: var(--page); margin: 0 auto;
+  padding: 80px var(--margin-r) 80px var(--margin-l);
+}
+.about h2 { margin-bottom: 44px; }
+.about-grid { display: grid; grid-template-columns: 236px 1fr; gap: 64px; align-items: start; }
+.about-photo { margin: 0; }
+.about-photo img { display: block; width: 100%; height: 288px; object-fit: cover; object-position: 34% 26%; }
+.about-photo figcaption { font-size: 12px; }
+.about-lede {
+  max-width: 36em;
+  font-family: var(--serif); font-size: 22px; line-height: 1.6; color: var(--ink);
+}
+.about p { max-width: 38em; line-height: 1.72; color: var(--soft-ink); }
+.about p:last-child { margin-bottom: 0; }
+
+/* ---------- contact ----------------------------------------- */
+
+.contact { background: var(--raised); border-top: 2px solid var(--ink); }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 452px; gap: 80px; align-items: start;
+  max-width: var(--page); margin: 0 auto;
+  padding: 72px var(--margin-r) 72px var(--margin-l);
+}
+.contact h2 { margin-bottom: 24px; }
+.contact-lede {
+  margin: 0; max-width: 26em;
+  font-family: var(--serif); font-weight: 300;
+  font-size: 26px; line-height: 1.44; color: var(--ink);
+}
+.contact form { display: flex; flex-direction: column; gap: 20px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--soft-ink);
+}
+.field input, .field textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--rule-dark); border-radius: 0;
+  background: var(--paper);
+  font-family: var(--sans); font-size: 16px; color: var(--ink);
+}
+.field textarea { resize: vertical; }
+.field input:focus, .field textarea:focus { border-color: var(--ink); outline: none; }
+.contact button {
   align-self: flex-start;
-  border: none;
+  padding: 13px 30px;
+  border: 1px solid var(--ink); border-radius: 0;
+  background: var(--ink); color: var(--raised);
+  font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: .06em;
   cursor: pointer;
 }
+.contact button:hover { background: var(--oxide); border-color: var(--oxide); }
 
-/* ============================================
-   Footer
-   ============================================ */
+/* ---------- Lantern Watch ----------------------------------- */
+
+.lantern {
+  max-width: var(--page); margin: 0 auto;
+  padding: 60px var(--margin-r) 64px var(--margin-l);
+  border-top: 1px solid var(--rule);
+}
+.lantern h2 { margin-bottom: 32px; }
+.lantern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.lantern .book-label { margin-bottom: 4px; }
+.lantern h3 {
+  max-width: 19em;
+  font-size: 31px; line-height: 1.16; letter-spacing: -.01em;
+}
+.lantern p { margin: 16px 0 0; max-width: 34em; color: var(--soft-ink); }
+.lantern-list {
+  margin: 0 0 26px; padding: 0; list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.lantern-list li {
+  padding: 11px 0; border-bottom: 1px solid var(--rule);
+  font-size: 16px; color: var(--soft-ink);
+}
+
+/* ---------- footer ------------------------------------------ */
+
 .site-footer {
-  position: relative;
-  z-index: 1;
-  padding: 32px var(--gutter) 48px calc(var(--gutter) + 40px);
-  color: var(--ink-soft);
-  font-size: 0.85rem;
+  display: flex; justify-content: space-between; align-items: baseline;
+  max-width: var(--page); margin: 0 auto;
+  padding: 26px var(--margin-r) 40px var(--margin-l);
+  border-top: 2px solid var(--ink);
+  font-size: 14px; color: var(--muted);
 }
+.site-footer a { border-bottom: 1px solid var(--rule-dark); }
 
-@media (max-width: 780px) {
-  .site-footer { padding: 24px 24px 40px; }
-}
+/* ============================================================
+   Mobile — single column, spine moves to x=20, margins tighten.
+   ============================================================ */
 
-/* ============================================
-   Reduced motion
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+@media (max-width: 900px) {
+  :root { --margin-l: 40px; --margin-r: 24px; --spine-x: 20px; }
+
+  body { font-size: 16px; }
+  .spine::after { top: 74px; height: 96px; }
+
+  .masthead { flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: 0; border-bottom: 0; }
+  .wordmark { font-size: 21px; padding-bottom: 12px; }
+  .masthead { padding-top: 22px; }
+  .site-nav {
+    width: 100%;
+    flex-wrap: wrap; gap: 8px 20px;
+    padding: 12px 0 16px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .site-nav a { font-size: 14px; }
+
+  .hero { grid-template-columns: 1fr; gap: 0; padding-top: 32px; padding-bottom: 34px; }
+  .hero h1 { font-size: 40px; line-height: 1.06; letter-spacing: -.015em; }
+  .hero-portrait { order: 2; margin: 26px 0 0; }
+  .hero-portrait img { height: 172px; object-position: 38% 28%; }
+  .hero .lede { order: 3; font-size: 17px; }
+
+  section > h2, .section-head h2, .mission h2, .lantern h2 { font-size: 13px; }
+
+  .book, .guide, .about-grid, .mission-grid, .contact-grid, .lantern-grid {
+    grid-template-columns: 1fr; gap: 20px;
+  }
+  .cover { width: 150px; }
+  .cover::before { transform: translate(8px, 10px); filter: blur(9px); }
+  .cover::after { width: 7px; }
+  .book-body h3 { font-size: 27px; line-height: 1.14; }
+  .book-body h3.h3-small { font-size: 23px; }
+  .book-sub { font-size: 17px; }
+  .links { flex-direction: column; }
+  .btn { padding: 14px 20px; font-size: 15px; }   /* 48px tap target */
+  .guide { margin: 0 calc(-1 * var(--margin-r)) 0 calc(-1 * var(--margin-l)); padding: 28px var(--margin-r) 30px var(--margin-l); }
+  .all-books { flex-direction: column; gap: 12px; padding-bottom: 30px; }
+
+  .mission blockquote p { font-size: 24px; line-height: 1.36; }
+  .mission-photo { order: -1; }
+  .mission-photo .crop, .mission-photo .crop img { height: 200px; }
+  .mission-photo .crop img { transform: scale(1.5); }
+
+  .about-photo img { height: 190px; }
+  .about-lede { font-size: 20px; line-height: 1.56; }
+
+  .contact-lede { font-size: 21px; line-height: 1.46; }
+  .contact button { align-self: stretch; padding: 15px 24px; font-size: 15px; }
+
+  .lantern h3 { font-size: 24px; line-height: 1.18; }
+  .lantern .btn { display: block; text-align: left; }
+
+  .site-footer { flex-direction: column; gap: 8px; }
+  .site-footer a { align-self: flex-start; }
 }
