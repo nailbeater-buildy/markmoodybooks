@@ -5,6 +5,8 @@
    ============================================================ */
 
 :root {
+  --desk:       #E4DECF;   /* the ground the page sheet sits on (wide screens) */
+  --sheet-edge: #D8D1BE;   /* hairline where the sheet meets the desk */
   --paper:      #F4F2ED;   /* page ground */
   --raised:     #FBFAF7;   /* alternating section ground */
   --ink:        #1A1614;   /* headings, buttons, hard rules */
@@ -31,13 +33,27 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--desk);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 17px;
   line-height: 1.68;
   -webkit-font-smoothing: antialiased;
   text-wrap: pretty;
+}
+
+/* The page sits as a centred sheet on the desk, with room to breathe
+   on wide monitors. Full-bleed bands (The Mission, Contact) stop at its edge. */
+.page {
+  position: relative;
+  max-width: var(--page);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--paper);
+  border-left: 1px solid var(--sheet-edge);
+  border-right: 1px solid var(--sheet-edge);
+  box-shadow: 0 0 60px rgba(26, 22, 20, .07);
+  overflow: hidden;
 }
 
 /* The one motif: a thin rule down the left margin, like a book's spine. */
@@ -239,14 +255,14 @@ figcaption {
 .mission figcaption { color: rgba(244,242,237,.6); }
 .mission cite { color: rgba(244,242,237,.66); }
 .mission figcaption a { color: var(--reverse); border-bottom-color: rgba(244,242,237,.45); }
-.mission .btn-red {                       /* primary reverses out */
-  background: var(--reverse); border-color: var(--reverse); color: var(--oxblood);
-}
-.mission .btn-red:hover { background: var(--ink); border-color: var(--ink); color: var(--reverse); }
-.mission .btn {                           /* outline reverses out */
-  border-color: rgba(244,242,237,.5); color: var(--reverse);
+.mission .btn {                           /* secondary: outline reverses out */
+  border-color: rgba(244,242,237,.5); color: var(--reverse); background: none;
 }
 .mission .btn:hover { border-color: var(--reverse); background: rgba(244,242,237,.12); color: var(--reverse); }
+.mission .btn.btn-red {                   /* primary: solid cream, oxblood label */
+  background: var(--reverse); border-color: var(--reverse); color: var(--oxblood);
+}
+.mission .btn.btn-red:hover { background: var(--ink); border-color: var(--ink); color: var(--reverse); }
 .mission .inner {
   max-width: var(--page); margin: 0 auto;
   padding: 72px var(--margin-r) 76px var(--margin-l);
@@ -380,7 +396,8 @@ figcaption {
 @media (max-width: 900px) {
   :root { --margin-l: 40px; --margin-r: 24px; --spine-x: 20px; }
 
-  body { font-size: 16px; }
+  body { font-size: 16px; background: var(--paper); }
+  .page { border: 0; box-shadow: none; min-height: 0; }
   .spine::after { top: 74px; height: 96px; }
 
   .masthead { flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: 0; border-bottom: 0; }
