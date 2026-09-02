@@ -1,202 +1,830 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mark L. Moody — Author &amp; Bible Teacher</title>
-<meta name="description" content="Books by Rev. Mark L. Moody: The Sabbath Exposed, Communion's Forgotten Story, and Sincerely Mistaken. Scripture-rich investigations from 45 years in pastoral ministry.">
-<meta property="og:title" content="Mark L. Moody — Author &amp; Bible Teacher">
-<meta property="og:description" content="Scripture-rich investigations into the Sabbath, Communion, and the questions behind them. By Rev. Mark L. Moody.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=Source+Sans+3:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rev. Mark L. Moody — Author &amp; Bible Teacher</title>
+  <meta name="description" content="Books by Rev. Mark L. Moody: Communion's Forgotten Story, Sincerely Mistaken, and The Sabbath Exposed. Scripture-rich investigations from 45 years in pastoral ministry.">
+  
+  <!-- Google Fonts: Newsreader (Refined Literary Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#FDF7F7',
+              100: '#FBEBEB',
+              200: '#F6D2D2',
+              600: '#A22822',
+              700: '#7F1D1D',
+              800: '#5F1414',
+              900: '#430E0E',
+            },
+            warm: {
+              50: '#FAF8F5',
+              100: '#F4EFEA',
+              200: '#E8DFD5',
+              300: '#D5C7B8',
+              800: '#2A2421',
+              900: '#181412',
+            }
+          },
+          boxShadow: {
+            'book': '0 20px 35px -10px rgba(42, 36, 33, 0.35), 0 5px 15px -3px rgba(42, 36, 33, 0.2)',
+            'book-hover': '0 30px 50px -15px rgba(127, 29, 29, 0.4), 0 10px 20px -5px rgba(42, 36, 33, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom 3D Book styling */
+    .book-3d {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .book-3d:hover {
+      transform: translateY(-8px) rotateY(-6deg) scale(1.02);
+    }
+    .book-spine-effect {
+      position: relative;
+    }
+    .book-spine-effect::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 14px;
+      background: linear-gradient(to right, rgba(0,0,0,0.45) 0%, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0.15) 100%);
+      pointer-events: none;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    
+    /* Background subtle mesh/texture */
+    .bg-paper-pattern {
+      background-color: #FAF8F5;
+      background-image: radial-gradient(#E8DFD5 0.75px, transparent 0.75px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body>
 
-<div class="page">
+<body class="bg-warm-50 text-warm-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
 
-<div class="spine" aria-hidden="true"></div>
-
-<header class="masthead">
-  <h1 class="wordmark"><a href="#top">Mark L. Moody</a></h1>
-  <nav class="site-nav">
-    <a href="#books">Books</a>
-    <a href="#mission">The Mission</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<main id="top">
-
-  <section id="books" class="books" aria-label="Books">
-
-    <!-- Books run newest first. To add one: copy an article.book block, change
-         the label, title, subtitle, blurb and links, delete the .book-note
-         line if that book has none, and paste it at the TOP of this list. -->
-
-    <article class="book">
-      <div class="cover">
-        <img src="assets/communions-forgotten-story.jpg" alt="Communion's Forgotten Story cover">
+  <!-- Top Announcement Bar / Mission Highlight -->
+  <div class="bg-brand-900 text-brand-100 text-xs sm:text-sm py-2 px-4 border-b border-brand-800">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-brand-700 text-white uppercase tracking-wider">Mission Impact</span>
+        <span>Every book sold directly supports missionary healthcare &amp; education in Kijabe, Kenya.</span>
       </div>
-      <div class="book-body">
-        <p class="book-label">Supports the Kenya mission</p>
-        <h3>Communion's Forgotten Story</h3>
-        <p class="book-sub">Reclaiming What We Lost</p>
-        <p>We take the bread. We drink the cup. We remember Jesus. But for many of us, that's where the understanding stops. What if there's far more to Communion than we ever realized?</p>
-        <p><em>Communion's Forgotten Story</em> traces the Lord's Supper from its roots in Eden, through the Passover and the upper room, through the early church and into your hands today. Along the way, you'll discover that when Jesus broke the bread and lifted the cup, He wasn't inventing a new ritual — He was fulfilling a story woven through Scripture from the very beginning. A story of promise. Of deliverance. Of sacrifice. Of hope.</p>
-        <p>Written for Christians of every tradition — whether you call it Communion, the Eucharist, or the Lord's Supper — this book will change the way you come to the table. Not with less reverence, but with far greater understanding.</p>
-        <p class="book-note">Every copy purchased supports the missionary work of Mark's daughter and son-in-law in Kijabe, Kenya. <a href="#mission">Read their story below.</a></p>
-        <div class="links">
-          <a class="btn btn-solid" href="https://link.amazon/B0ciSrOaV">Paperback</a>
-          <a class="btn" href="https://link.amazon/B04iw9IRl">Hardcover</a>
-        </div>
-      </div>
-    </article>
+      <a href="#mission" class="hidden md:inline-flex items-center gap-1 font-semibold text-white hover:underline">
+        Read the Story <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+  </div>
 
-    <div class="guide">
-      <div class="cover">
-        <img src="assets/study-guide.jpg" alt="Small-group study guide cover">
+  <!-- Sticky Glassmorphism Header -->
+  <header class="sticky top-0 z-40 bg-warm-50/90 backdrop-blur-md border-b border-warm-200 transition-all">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="group flex flex-col">
+        <span class="font-serif text-2xl font-bold tracking-tight text-warm-900 group-hover:text-brand-700 transition">Mark L. Moody</span>
+        <span class="text-[11px] uppercase tracking-widest text-warm-800/60 font-medium">Author &amp; Bible Teacher</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-warm-800">
+        <a href="#books" class="hover:text-brand-700 transition py-1">The Books</a>
+        <a href="#study-guide" class="hover:text-brand-700 transition py-1 flex items-center gap-1.5">
+          <span>Study Guide</span>
+          <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full">Free</span>
+        </a>
+        <a href="#mission" class="hover:text-brand-700 transition py-1">The Mission</a>
+        <a href="#about" class="hover:text-brand-700 transition py-1">About Mark</a>
+        <a href="#contact" class="hover:text-brand-700 transition py-1">Contact</a>
+      </nav>
+
+      <!-- Header CTA -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://link.amazon/B0ewScl6T" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition transform hover:-translate-y-0.5">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Amazon Store</span>
+        </a>
       </div>
-      <div class="book-body">
-        <p class="book-label book-label-red">Free for groups</p>
-        <h3 class="h3-small">Communion's Forgotten Story Study Guide</h3>
-        <p>A twelve-session companion built to help small groups explore the Lord's Supper together — from its roots in Eden through the Passover, the upper room, and into the life of the early church.</p>
-        <p>Written by a pastor with forty-five years of cross-denominational ministry, it doesn't advocate for any one tradition or take sides on the debates that divide — ordinance or sacrament, symbolic or real presence, open table or closed. It simply invites every believer to recover the ancient story behind the meal they already share.</p>
-        <p>Each session runs about an hour: an icebreaker, Scripture to explore, discussion questions, personal reflection, and a closing prayer. No theological background required — just open Bibles and honest conversation.</p>
-        <div class="links">
-          <a class="btn btn-red" href="https://drive.google.com/file/d/1Ge6kl348dqpOPxWMjKifScObTWFVw9bk/view">Download the free guide (PDF)</a>
-          <a class="btn btn-quiet" href="https://link.amazon/B0fivDLKu">Printed companion on Amazon</a>
-        </div>
-      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-warm-900 hover:text-brand-700" aria-label="Toggle navigation menu">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
     </div>
 
-    <article class="book">
-      <div class="cover">
-        <img src="assets/sincerely-mistaken.jpg" alt="Sincerely Mistaken cover">
-      </div>
-      <div class="book-body">
-        <p class="book-label">Newest</p>
-        <h3>Sincerely Mistaken</h3>
-        <p class="book-sub">The Sabbath-Sunday Question</p>
-        <p>For most Christians, Sunday worship has never been a question worth asking. It was simply the way things were — received through tradition, affirmed by trusted teachers, rarely examined closely. Until one pastor, after forty-five years of ministry, finally sat down with Scripture intending to defend what he had always believed. What he discovered surprised him.</p>
-        <p><em>Sincerely Mistaken</em> traces one man's honest investigation into one of Christianity's longest-standing assumptions — that the Sabbath was transferred from the seventh day to Sunday. Moving carefully through Scripture and two thousand years of church history, it asks a question most believers have never seriously considered: where, exactly, does Scripture authorize the change?</p>
-        <p>Written with humility and deep respect for sincere Christians on every side, this is not a book written to win an argument. It is an invitation to examine familiar assumptions honestly and consider the evidence for yourself. The door is open. Come and see.</p>
-        <div class="links">
-          <a class="btn btn-solid" href="https://link.amazon/B0cTA3N13">Paperback</a>
-          <a class="btn" href="https://link.amazon/B08No0Gq5">Hardcover</a>
-        </div>
-      </div>
-    </article>
-
-    <hr class="rule">
-
-    <article class="book">
-      <div class="cover">
-        <img src="assets/the-sabbath-exposed.jpg" alt="The Sabbath Exposed cover">
-      </div>
-      <div class="book-body">
-        <p class="book-label">The full investigation</p>
-        <h3>The Sabbath Exposed</h3>
-        <p class="book-sub">Unexpected Discoveries, Compelling Evidence</p>
-        <p>Is the Sabbath still for today? What if everything you thought you knew about the weekly day of worship deserved a second look?</p>
-        <p>When challenged to defend the biblical basis of his chosen day of worship, Rev. Mark Moody launched a wide-ranging, Scripture-rich investigation spanning Genesis to Revelation. <em>The Sabbath Exposed</em> uncovers his unexpected discoveries and compelling evidence, inviting a fresh look at long-standing assumptions.</p>
-        <p>Step into your own journey through Scripture, history, and tradition — and decide for yourself, one revelation at a time.</p>
-        <div class="links">
-          <a class="btn btn-solid" href="https://link.amazon/B04mpbbe3">Paperback</a>
-          <a class="btn" href="https://link.amazon/B09bVd7FQ">Hardcover</a>
-        </div>
-      </div>
-    </article>
-
-    <hr class="rule">
-
-    <div class="all-books">
-      <a href="https://link.amazon/B0ewScl6T">See all of Mark's books on Amazon</a>
-      <a href="https://link.amazon/B0c0nZrXK">Mark Moody on Amazon.ca</a>
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 py-4 bg-warm-50 border-b border-warm-200 flex flex-col gap-3">
+      <a href="#books" class="py-2 text-base font-medium text-warm-800 hover:text-brand-700">The Books</a>
+      <a href="#study-guide" class="py-2 text-base font-medium text-warm-800 hover:text-brand-700">Free Study Guide</a>
+      <a href="#mission" class="py-2 text-base font-medium text-warm-800 hover:text-brand-700">The Kenya Mission</a>
+      <a href="#about" class="py-2 text-base font-medium text-warm-800 hover:text-brand-700">About Mark</a>
+      <a href="#contact" class="py-2 text-base font-medium text-warm-800 hover:text-brand-700">Contact &amp; Bulk Orders</a>
+      <a href="https://link.amazon/B0ewScl6T" target="_blank" class="mt-2 text-center bg-brand-700 text-white py-2.5 rounded-lg font-semibold">Visit Amazon Author Page</a>
     </div>
-  </section>
+  </header>
 
-  <section id="mission" class="mission">
-    <div class="inner">
-      <h2>The Mission</h2>
-      <div class="mission-grid">
-        <div>
-          <blockquote>
-            <p>&ldquo;We have felt called to take steps towards returning to Africa as a family. The doors have now opened.&rdquo;</p>
-            <cite>— Matt &amp; Amy-Lynn Ness</cite>
-          </blockquote>
-          <p>All proceeds from <em>Communion's Forgotten Story</em> and its study guide support the missionary work of Mark's daughter and son-in-law, Amy-Lynn and Dr. Matthew Ness, serving with Africa Inland Mission at Rift Valley Academy in Kijabe, Kenya — Matthew as a physician, Amy-Lynn as an educator.</p>
-          <p>The academy has over a century of ministry history and is home to nearly 500 students from 30 countries, most of them children of missionary families serving across Africa.</p>
-          <div class="links">
-            <a class="btn btn-red" href="https://cagiving.aimint.org/donations/member-matthew-amy-lynn-ness-support/">Give directly to the Ness family</a>
-            <a class="btn" href="https://ness-family.epistle.org/">Follow their story</a>
+  <!-- Hero Section -->
+  <section class="relative bg-paper-pattern py-16 md:py-24 border-b border-warm-200 overflow-hidden">
+    <!-- Decorative background glow -->
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-100/60 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-100/50 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold uppercase tracking-wider">
+            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+            <span>45+ Years Pastoral Experience</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-warm-900 leading-[1.12]">
+            Reclaiming the Wonder Behind Ancient Biblical Truths.
+          </h1>
+
+          <p class="text-lg sm:text-xl text-warm-800/80 leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0">
+            Scripture-rich investigations written with the heart of a seasoned pastor and the clarity of a Bible teacher. Discover what happens when we examine familiar traditions in the light of God's Word.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#books" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white px-6 py-3.5 rounded-xl font-semibold shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5">
+              <span>Explore Books</span>
+              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>
+            <a href="#study-guide" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-warm-100 text-warm-900 border border-warm-300 px-6 py-3.5 rounded-xl font-semibold shadow-sm transition">
+              <i data-lucide="file-text" class="w-4 h-4 text-brand-700"></i>
+              <span>Free Group Study Guide</span>
+            </a>
+          </div>
+
+          <!-- Feature Badges -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-warm-200/80 max-w-lg mx-auto lg:mx-0 text-left">
+            <div>
+              <div class="font-serif text-2xl font-bold text-brand-800">3 Books</div>
+              <div class="text-xs text-warm-800/70">Published Works</div>
+            </div>
+            <div>
+              <div class="font-serif text-2xl font-bold text-brand-800">45+ Yrs</div>
+              <div class="text-xs text-warm-800/70">Pastoral Ministry</div>
+            </div>
+            <div>
+              <div class="font-serif text-2xl font-bold text-brand-800">100%</div>
+              <div class="text-xs text-warm-800/70">Proceeds to Kenya</div>
+            </div>
           </div>
         </div>
-        <figure class="mission-photo">
-          <div class="crop"><img src="assets/ness-family.jpg" alt="The Ness family"></div>
-          <figcaption>Matt and Amy-Lynn Ness with their three daughters. Live updates and a family journal at <a href="https://ness-family.epistle.org/">the Ness Family Epistle page</a>.</figcaption>
-        </figure>
+
+        <!-- Hero Featured Book Spotlight -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-sm">
+            <div class="absolute inset-0 bg-brand-700/15 rounded-3xl blur-2xl transform rotate-3 scale-95"></div>
+            
+            <div class="relative bg-white p-6 sm:p-7 rounded-2xl border border-warm-200 shadow-xl">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-2.5 py-1 rounded-md border border-brand-100">Featured Release</span>
+                <span class="text-xs text-warm-800/60 font-medium">Available on Amazon</span>
+              </div>
+              
+              <div class="book-3d book-spine-effect mb-6 mx-auto max-w-[220px]">
+                <img src="assets/communions-forgotten-story.jpg" alt="Communion's Forgotten Story Book Cover" class="rounded-r-lg shadow-book w-full">
+              </div>
+
+              <div class="text-center space-y-2">
+                <h3 class="font-serif text-xl font-bold text-warm-900">Communion's Forgotten Story</h3>
+                <p class="text-xs italic text-brand-800 font-serif">Reclaiming What We Lost</p>
+                <p class="text-xs text-warm-800/70 line-clamp-2">Traces the Lord's Supper from Eden to Passover and into your hands today.</p>
+                
+                <div class="pt-3 flex gap-2 justify-center">
+                  <a href="https://link.amazon/B0ciSrOaV" target="_blank" class="flex-1 bg-brand-700 hover:bg-brand-800 text-white text-xs font-semibold py-2.5 px-3 rounded-lg text-center transition">
+                    Paperback
+                  </a>
+                  <a href="https://link.amazon/B04iw9IRl" target="_blank" class="flex-1 bg-warm-100 hover:bg-warm-200 text-warm-900 text-xs font-semibold py-2.5 px-3 rounded-lg text-center border border-warm-300 transition">
+                    Hardcover
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="about" class="about">
-    <h2>About Mark</h2>
-    <div class="about-grid">
-      <figure class="about-photo">
-        <img src="assets/mark-and-wife.jpg" alt="Mark Moody">
-        <figcaption>Rev. Mark L. Moody</figcaption>
-      </figure>
+  <!-- Books Section -->
+  <section id="books" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <!-- Section Title -->
+      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-brand-700">Published Works</h2>
+        <p class="font-serif text-3xl sm:text-4xl font-bold text-warm-900">Explore Mark's Investigations</p>
+        <p class="text-warm-800/70 text-base">Thoughtful, thorough biblical investigations designed to encourage believers of every tradition to open their Bibles and examine the text with fresh eyes.</p>
+      </div>
+
+      <!-- Book List Cards -->
+      <div class="space-y-16">
+        
+        <!-- Book 1: Communion's Forgotten Story -->
+        <article class="bg-warm-50 rounded-2xl border border-warm-200 p-8 sm:p-10 shadow-sm hover:shadow-md transition grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="md:col-span-4 flex justify-center">
+            <div class="book-3d book-spine-effect max-w-[220px]">
+              <img src="assets/communions-forgotten-story.jpg" alt="Communion's Forgotten Story" class="rounded-r-md shadow-book w-full">
+            </div>
+          </div>
+          <div class="md:col-span-8 space-y-5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-brand-700 text-white text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Kenya Mission Supported</span>
+              <span class="bg-warm-200 text-warm-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Protestant &amp; Historical Theology</span>
+            </div>
+            
+            <div>
+              <h3 class="font-serif text-2xl sm:text-3xl font-bold text-warm-900">Communion's Forgotten Story</h3>
+              <p class="font-serif text-lg italic text-brand-800 mt-1">Reclaiming What We Lost</p>
+            </div>
+
+            <p class="text-warm-800/80 leading-relaxed text-sm sm:text-base">
+              We take the bread. We drink the cup. We remember Jesus. But for many of us, that's where understanding stops. <em>Communion's Forgotten Story</em> traces the Lord's Supper from its roots in Eden, through Passover and the upper room, into the early church and into your hands today. Discover how Jesus wasn't inventing a new ritual — He was fulfilling a story woven from the very beginning.
+            </p>
+
+            <!-- Key Takeaways / Feature bullets -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-warm-800 font-medium pt-1">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Traces roots from Eden through Passover</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Written for Christians of all traditions</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Free 12-session companion guide available</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>100% royalties aid Kijabe, Kenya</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-warm-200">
+              <a href="https://link.amazon/B0ciSrOaV" target="_blank" class="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm transition">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                <span>Order Paperback</span>
+              </a>
+              <a href="https://link.amazon/B04iw9IRl" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-warm-100 text-warm-900 border border-warm-300 text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+                <span>Hardcover Edition</span>
+              </a>
+              <button onclick="openExcerptModal('communions')" class="inline-flex items-center gap-1.5 text-brand-800 hover:text-brand-900 text-sm font-semibold px-3 py-2">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <span>Read Sample Excerpt</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Book 2: Sincerely Mistaken -->
+        <article class="bg-warm-50 rounded-2xl border border-warm-200 p-8 sm:p-10 shadow-sm hover:shadow-md transition grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="md:col-span-4 flex justify-center">
+            <div class="book-3d book-spine-effect max-w-[220px]">
+              <img src="assets/sincerely-mistaken.jpg" alt="Sincerely Mistaken" class="rounded-r-md shadow-book w-full">
+            </div>
+          </div>
+          <div class="md:col-span-8 space-y-5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-amber-800 text-white text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Newest Investigation</span>
+              <span class="bg-warm-200 text-warm-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Church History &amp; Scripture</span>
+            </div>
+            
+            <div>
+              <h3 class="font-serif text-2xl sm:text-3xl font-bold text-warm-900">Sincerely Mistaken</h3>
+              <p class="font-serif text-lg italic text-brand-800 mt-1">The Sabbath-Sunday Question</p>
+            </div>
+
+            <p class="text-warm-800/80 leading-relaxed text-sm sm:text-base">
+              For most believers, Sunday worship was simply received through tradition. Until one pastor, after forty-five years of ministry, sat down with Scripture intending to defend what he had always believed. <em>Sincerely Mistaken</em> traces an honest journey through Scripture and two millennia of church history, asking a question rarely examined: where, exactly, does Scripture authorize the change?
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-warm-800 font-medium pt-1">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Written with deep pastoral humility &amp; grace</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Thorough analysis of biblical texts</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>2,000 years of church history documented</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Ideal for personal &amp; theological study</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-warm-200">
+              <a href="https://link.amazon/B0cTA3N13" target="_blank" class="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm transition">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                <span>Order Paperback</span>
+              </a>
+              <a href="https://link.amazon/B08No0Gq5" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-warm-100 text-warm-900 border border-warm-300 text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+                <span>Hardcover Edition</span>
+              </a>
+              <button onclick="openExcerptModal('mistaken')" class="inline-flex items-center gap-1.5 text-brand-800 hover:text-brand-900 text-sm font-semibold px-3 py-2">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <span>Read Sample Excerpt</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Book 3: The Sabbath Exposed -->
+        <article class="bg-warm-50 rounded-2xl border border-warm-200 p-8 sm:p-10 shadow-sm hover:shadow-md transition grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="md:col-span-4 flex justify-center">
+            <div class="book-3d book-spine-effect max-w-[220px]">
+              <img src="assets/the-sabbath-exposed.jpg" alt="The Sabbath Exposed" class="rounded-r-md shadow-book w-full">
+            </div>
+          </div>
+          <div class="md:col-span-8 space-y-5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-stone-800 text-white text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">In-Depth Foundation</span>
+              <span class="bg-warm-200 text-warm-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Genesis to Revelation</span>
+            </div>
+            
+            <div>
+              <h3 class="font-serif text-2xl sm:text-3xl font-bold text-warm-900">The Sabbath Exposed</h3>
+              <p class="font-serif text-base sm:text-lg italic text-brand-800 mt-1 leading-snug">Unexpected Discoveries, Compelling Evidence. Does the Fourth Commandment apply to new covenant believers?</p>
+            </div>
+
+            <p class="text-warm-800/80 leading-relaxed text-sm sm:text-base">
+              When challenged to defend the biblical basis of his chosen day of worship, Rev. Mark Moody launched a wide-ranging, Scripture-rich investigation spanning Genesis to Revelation. <em>The Sabbath Exposed</em> uncovers his unexpected discoveries and compelling evidence, inviting a fresh look at long-standing assumptions.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-warm-800 font-medium pt-1">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Comprehensive Genesis-to-Revelation coverage</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-700 shrink-0"></i>
+                <span>Direct scripture comparisons and citations</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-warm-200">
+              <a href="https://link.amazon/B04mpbbe3" target="_blank" class="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm transition">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                <span>Order Paperback</span>
+              </a>
+              <a href="https://link.amazon/B09bVd7FQ" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-warm-100 text-warm-900 border border-warm-300 text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+                <span>Hardcover Edition</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Quick Amazon Links Bar -->
+      <div class="mt-12 p-6 rounded-xl bg-warm-100 border border-warm-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div>
+          <h4 class="font-serif text-lg font-bold text-warm-900">Looking for Canadian or International orders?</h4>
+          <p class="text-sm text-warm-800/70">All titles are available globally with local printing through Amazon.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://link.amazon/B05UrSvlP" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-800 bg-white border border-warm-300 px-4 py-2 rounded-lg hover:bg-warm-50 transition">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+            <span>Mark Moody on Amazon.ca</span>
+          </a>
+          <a href="https://link.amazon/B0ewScl6T" target="_blank" class="inline-flex items-center gap-1.5 text-sm font-semibold text-white bg-warm-800 px-4 py-2 rounded-lg hover:bg-warm-900 transition">
+            <span>All Books on Amazon</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Featured Lead Magnet: Free Study Guide Section -->
+  <section id="study-guide" class="py-20 bg-brand-900 text-white relative overflow-hidden">
+    <!-- Subtle graphic background -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="bg-gradient-to-br from-brand-800 to-brand-900 border border-brand-700/60 rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          
+          <div class="lg:col-span-4 flex justify-center">
+            <div class="relative">
+              <div class="absolute -inset-4 bg-brand-600/30 rounded-2xl blur-xl"></div>
+              <div class="book-3d book-spine-effect relative max-w-[200px]">
+                <img src="assets/study-guide.jpg" alt="Study Guide Cover" class="rounded-r-md shadow-2xl w-full">
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-8 space-y-6">
+            <div class="inline-flex items-center gap-2 bg-brand-700/80 text-brand-100 border border-brand-500/40 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              <i data-lucide="gift" class="w-3.5 h-3.5"></i>
+              <span>Complimentary Small-Group Resource</span>
+            </div>
+
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              Communion's Forgotten Story <br class="hidden sm:inline"><span class="text-brand-200">Study Guide: A Small Group Companion</span>
+            </h2>
+
+            <p class="text-brand-100/90 text-base sm:text-lg leading-relaxed">
+              Designed specifically for small groups, Sunday school classes, and personal reflection. No theological prerequisites or partisan debates — each 1-hour session includes open-ended icebreakers, scripture passages, discussion questions, and guided prayer.
+            </p>
+
+            <!-- Guide Details Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2 text-sm">
+              <div class="bg-brand-950/40 border border-brand-700/40 p-3 rounded-xl">
+                <span class="block text-brand-300 text-xs uppercase font-semibold">Format</span>
+                <strong class="text-white text-base">12 Sessions</strong>
+              </div>
+              <div class="bg-brand-950/40 border border-brand-700/40 p-3 rounded-xl">
+                <span class="block text-brand-300 text-xs uppercase font-semibold">Duration</span>
+                <strong class="text-white text-base">~60 Mins / Session</strong>
+              </div>
+              <div class="bg-brand-950/40 border border-brand-700/40 p-3 rounded-xl col-span-2 sm:col-span-1">
+                <span class="block text-brand-300 text-xs uppercase font-semibold">Cost</span>
+                <strong class="text-emerald-400 text-base">100% Free (PDF)</strong>
+              </div>
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+              <a href="https://drive.google.com/file/d/1Ge6kl348dqpOPxWMjKifScObTWFVw9bk/view" target="_blank" class="inline-flex items-center gap-2.5 bg-white hover:bg-warm-100 text-brand-900 font-bold px-6 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+                <i data-lucide="download" class="w-5 h-5 text-brand-700"></i>
+                <span>Download Free PDF Guide</span>
+              </a>
+              <a href="https://link.amazon/B0fivDLKu" target="_blank" class="inline-flex items-center gap-2 bg-brand-800/80 hover:bg-brand-800 text-brand-100 border border-brand-600 px-5 py-3.5 rounded-xl font-medium transition">
+                <i data-lucide="book" class="w-4 h-4"></i>
+                <span>Order Printed Companion on Amazon</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Mission Section -->
+  <section id="mission" class="py-20 bg-warm-50 border-b border-warm-200">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="heart" class="w-4 h-4"></i>
+            <span>Giving Back</span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-warm-900">
+            A Story with a Global Purpose
+          </h2>
+
+          <blockquote class="border-l-4 border-brand-700 pl-4 italic text-lg sm:text-xl text-warm-800 font-serif my-4">
+            &ldquo;We have felt called to take steps towards returning to Africa as a family. The doors have now opened.&rdquo;
+            <span class="block text-xs font-sans not-italic font-bold tracking-wider uppercase text-brand-800 mt-2">— Dr. Matthew &amp; Amy-Lynn Ness</span>
+          </blockquote>
+
+          <p class="text-warm-800/80 text-base leading-relaxed">
+            All author proceeds from <em>Communion's Forgotten Story</em> and its study guide directly fund the missionary work of Mark's daughter and son-in-law, serving with Africa Inland Mission at Rift Valley Academy in Kijabe, Kenya.
+          </p>
+
+          <p class="text-warm-800/80 text-base leading-relaxed">
+            Matthew serves as a missionary physician providing critical medical care, while Amy-Lynn serves as an educator helping shape nearly 500 children of missionary families serving across thirty countries in Africa.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="https://cagiving.aimint.org/donations/member-matthew-amy-lynn-ness-support/" target="_blank" class="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-5 py-3 rounded-xl shadow-sm transition">
+              <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+              <span>Give Directly to the Ness Family</span>
+            </a>
+            <a href="https://ness-family.epistle.org/" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-warm-100 text-warm-900 border border-warm-300 font-semibold px-5 py-3 rounded-xl transition">
+              <i data-lucide="external-link" class="w-4 h-4 text-warm-800/60"></i>
+              <span>Follow Their Family Journal</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mission Photo Card -->
+        <div class="lg:col-span-5">
+          <div class="bg-white p-4 rounded-2xl border border-warm-200 shadow-md">
+            <div class="overflow-hidden rounded-xl">
+              <img src="assets/ness-family.jpg" alt="Matt and Amy-Lynn Ness and their family" class="w-full h-80 object-cover object-center transform hover:scale-105 transition duration-500">
+            </div>
+            <p class="text-xs text-warm-800/70 font-serif italic text-center mt-3">
+              Matt and Amy-Lynn Ness with their three daughters. Live updates and family journal at <a href="https://ness-family.epistle.org/" target="_blank" class="underline text-brand-700">the Ness Family Epistle page</a>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Mark Section -->
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Author Photo -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative max-w-md mx-auto">
+            <div class="absolute -inset-2 bg-warm-200 rounded-3xl -rotate-2"></div>
+            <div class="relative bg-white p-4 rounded-2xl border border-warm-200 shadow-xl">
+              <img src="assets/mark-and-wife.jpg" alt="Rev. Mark L. Moody and his wife" class="rounded-xl w-full h-96 object-cover object-top">
+              <div class="pt-3 text-center">
+                <h4 class="font-serif font-bold text-warm-900 text-lg">Rev. Mark L. Moody</h4>
+                <p class="text-xs text-warm-800/60 uppercase tracking-wider font-semibold">Author, Pastor &amp; Teacher</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Author Bio Content -->
+        <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+          <div class="inline-flex items-center gap-2 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="user" class="w-4 h-4"></i>
+            <span>The Author's Heart</span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-warm-900">
+            About Rev. Mark L. Moody
+          </h2>
+
+          <p class="font-serif text-xl text-brand-800/90 leading-relaxed italic">
+            &ldquo;Writing from within the historic Protestant tradition, convinced that sincere Christians should never fear examining long-held assumptions in the light of Scripture.&rdquo;
+          </p>
+
+          <div class="space-y-4 text-warm-800/80 text-base leading-relaxed">
+            <p>
+              With over forty-five years in full-time pastoral ministry, Rev. Mark L. Moody brings both a shepherd's warmth and a scholar's rigor to every subject he touches. Originally from Washington State, he spent much of his active ministry in British Columbia, Canada — serving as a youth pastor, directing Teen Challenge for a decade, and pastoring local congregations for more than thirty years.
+            </p>
+            <p>
+              He currently assists in pastoral leadership at a desert community church in California. Mark and his wife are the blessed parents of four children and fifteen grandchildren.
+            </p>
+          </div>
+
+          <!-- Quick Ministry Milestones -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+            <div class="bg-warm-50 border border-warm-200 p-3 rounded-xl text-center">
+              <span class="block text-brand-800 font-bold text-lg font-serif">45+ Years</span>
+              <span class="text-xs text-warm-800/70 font-medium">Active Ministry</span>
+            </div>
+            <div class="bg-warm-50 border border-warm-200 p-3 rounded-xl text-center">
+              <span class="block text-brand-800 font-bold text-lg font-serif">10 Years</span>
+              <span class="text-xs text-warm-800/70 font-medium">Teen Challenge</span>
+            </div>
+            <div class="bg-warm-50 border border-warm-200 p-3 rounded-xl text-center col-span-2 sm:col-span-1">
+              <span class="block text-brand-800 font-bold text-lg font-serif">15</span>
+              <span class="text-xs text-warm-800/70 font-medium">Grandchildren</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact & Bulk Orders Section -->
+  <section id="contact" class="py-20 bg-warm-100 border-t border-warm-200">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Contact Intro -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="inline-flex items-center gap-2 text-brand-700 text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span>Get in Touch</span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-warm-900">
+            Connect with Mark
+          </h2>
+
+          <p class="text-warm-800/80 text-base leading-relaxed">
+            Have a question about a biblical passage, a bulk order for your church or small group, or a note on how a book touched your walk? Mark welcomes your message.
+          </p>
+
+          <!-- Church Bulk Discount Card -->
+          <div class="bg-white p-6 rounded-2xl border border-brand-200/80 shadow-sm space-y-3">
+            <div class="flex items-center gap-2 text-brand-800 font-semibold text-sm">
+              <i data-lucide="users" class="w-4 h-4"></i>
+              <span>Church &amp; Group Discounts</span>
+            </div>
+            <p class="text-xs sm:text-sm text-warm-800/70 leading-relaxed">
+              Discounts are available for orders of 10 or more copies for church bookstores, Bible studies, and ministry groups. Let us know in your note!
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="lg:col-span-7">
+          <div class="bg-white p-8 sm:p-10 rounded-2xl border border-warm-200 shadow-md">
+            <form action="https://formspree.io/f/xwlkokga" method="POST" class="space-y-5">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="name" class="block text-xs font-bold uppercase tracking-wider text-warm-800 mb-2">Your Name</label>
+                  <input type="text" id="name" name="name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-lg border border-warm-300 focus:border-brand-700 focus:ring-2 focus:ring-brand-100 outline-none text-sm transition">
+                </div>
+                <div>
+                  <label for="email" class="block text-xs font-bold uppercase tracking-wider text-warm-800 mb-2">Email Address</label>
+                  <input type="email" id="email" name="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-lg border border-warm-300 focus:border-brand-700 focus:ring-2 focus:ring-brand-100 outline-none text-sm transition">
+                </div>
+              </div>
+
+              <div>
+                <label for="subject" class="block text-xs font-bold uppercase tracking-wider text-warm-800 mb-2">Subject / Inquiry Type</label>
+                <select id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-warm-300 focus:border-brand-700 focus:ring-2 focus:ring-brand-100 outline-none text-sm transition bg-white">
+                  <option value="General Inquiry">General Question / Note to Mark</option>
+                  <option value="Bulk Order">Church / Group Bulk Order (10+ Copies)</option>
+                  <option value="Study Guide Feedback">Study Guide Feedback</option>
+                  <option value="Speaking / Ministry">Speaking / Ministry Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-xs font-bold uppercase tracking-wider text-warm-800 mb-2">Message</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Share your thoughts or questions..." class="w-full px-4 py-3 rounded-lg border border-warm-300 focus:border-brand-700 focus:ring-2 focus:ring-brand-100 outline-none text-sm transition"></textarea>
+              </div>
+
+              <input type="hidden" name="_subject" value="markmoodybooks.com website message">
+
+              <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-xl shadow-md transition transform hover:-translate-y-0.5">
+                <span>Send Message</span>
+                <i data-lucide="send" class="w-4 h-4"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Family Project Banner: Lantern Watch -->
+  <section class="py-6 bg-warm-200/60 border-t border-warm-300 text-center text-xs sm:text-sm text-warm-800">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-2">
+      <span class="font-semibold flex items-center gap-1.5">
+        <i data-lucide="shield" class="w-4 h-4 text-brand-700"></i>
+        Also from the Moody family:
+      </span>
+      <span><strong>Lantern Watch</strong> — Free, open-source parental controls that run directly on your own router.</span>
+      <a href="https://lanternwatch.org/" target="_blank" class="text-brand-800 font-bold hover:underline ml-1">Visit lanternwatch.org &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="bg-warm-900 text-warm-300 py-12">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div>
-        <p class="about-lede">With over forty-five years in full-time evangelical ministry, Rev. Mark L. Moody brings the heart of a pastor and the clarity of a Bible teacher to every page.</p>
-        <p>Originally from Washington State, he spent much of his ministry in British Columbia, Canada, where he served as a youth pastor, devoted a decade to Teen Challenge, and pastored churches for more than thirty years. He now assists in leadership at a community church serving seasonal residents in the California desert.</p>
-        <p>Writing from within the historic Protestant tradition, he is convinced that sincere Christians should never be afraid to reexamine long-held assumptions in the light of God's Word.</p>
-        <p>Mark and his wife are the proud parents of four children and grandparents to fifteen grandchildren. He brings the same love for family to every page he writes.</p>
+        <span class="font-serif text-xl font-bold text-white tracking-tight">Mark L. Moody</span>
+        <p class="text-xs text-warm-400 mt-1">&copy; 2026 Rev. Mark L. Moody. All rights reserved.</p>
+      </div>
+      
+      <div class="flex items-center gap-6 text-sm">
+        <a href="#books" class="hover:text-white transition">Books</a>
+        <a href="#study-guide" class="hover:text-white transition">Study Guide</a>
+        <a href="#mission" class="hover:text-white transition">Kenya Mission</a>
+        <a href="https://link.amazon/B0ewScl6T" target="_blank" class="text-brand-300 hover:text-white transition flex items-center gap-1">
+          <span>Amazon Store</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <section id="contact" class="contact">
-    <div class="contact-grid">
-      <div>
-        <h2>Get in Touch</h2>
-        <p class="contact-lede">Have a question about a book, a bulk order inquiry, or just want to share how one of these books reached you? Mark would love to hear from you.</p>
-        <p class="contact-note">Churches and group leaders: all of Mark's books are available at a reduced price on orders of ten or more. Just ask.</p>
+  <!-- Excerpt Modal Popup -->
+  <div id="excerptModal" class="fixed inset-0 z-50 bg-warm-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 sm:p-6">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      
+      <div class="p-6 border-b border-warm-200 flex items-center justify-between bg-warm-50">
+        <div>
+          <span id="modalCategory" class="text-[11px] font-bold uppercase tracking-wider text-brand-700">Sample Excerpt</span>
+          <h3 id="modalTitle" class="font-serif text-2xl font-bold text-warm-900">Book Title</h3>
+        </div>
+        <button onclick="closeExcerptModal()" class="p-2 rounded-lg text-warm-600 hover:text-warm-900 hover:bg-warm-200/60 transition" aria-label="Close modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
       </div>
-      <form action="https://formspree.io/f/xwlkokga" method="POST">
-        <div class="field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="6" required></textarea>
-        </div>
-        <input type="hidden" name="_subject" value="markmoodybooks.com contact form">
-        <button type="submit">Send Message</button>
-      </form>
+
+      <div id="modalContent" class="p-6 sm:p-8 overflow-y-auto font-serif text-warm-800 text-base sm:text-lg leading-relaxed space-y-4">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="p-4 border-t border-warm-200 bg-warm-50 flex justify-between items-center">
+        <span class="text-xs text-warm-600 font-sans">Read full chapters on Amazon</span>
+        <a id="modalBuyLink" href="#" target="_blank" class="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-sans text-xs font-semibold px-4 py-2.5 rounded-lg transition">
+          <span>Order on Amazon</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <section class="lantern">
-    <p>Also from the family: <strong>Lantern Watch</strong> — free, open-source parental controls that run on your own router. <a href="https://lanternwatch.org/">lanternwatch.org</a></p>
-  </section>
+  <!-- Interactive Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
 
-</main>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
 
-<footer class="site-footer">
-  <span>© 2026 Mark L. Moody</span>
-  <a href="https://link.amazon/B0ewScl6T">Books on Amazon</a>
-</footer>
+    // Excerpt data
+    const excerpts = {
+      communions: {
+        title: "Communion's Forgotten Story",
+        category: "Excerpt from Chapter 1",
+        buyLink: "https://link.amazon/B0ciSrOaV",
+        content: `
+          <p class="font-sans text-xs uppercase tracking-widest text-brand-700 font-bold">The Table in the Shadows</p>
+          <p>We take the bread. We drink the cup. We remember Jesus. But for many of us, that is where the understanding stops.</p>
+          <p>We see the Lord's Supper as a solemn pause in the service — a brief, personal remembrance squeezed between songs and the sermon. We know it matters, but we rarely grasp <em>why</em> the symbols carry such immense theological weight.</p>
+          <p>When Jesus sat in that upper room with twelve weary men on the night before His execution, He did not create a novel, unconnected ritual. He lifted bread that had been prepared for fifteen centuries of Passover meals. He took the third cup — the Cup of Redemption — and said words that shook the foundations of ancient covenant history.</p>
+          <p>To understand the table before you this Sunday, we must travel back. Past the Reformation. Past Rome. Past the catacombs. We must go all the way back to the garden where humanity first ate in rebellion, and watch how God prepared a table of restoration across millennia.</p>
+        `
+      },
+      mistaken: {
+        title: "Sincerely Mistaken",
+        category: "Excerpt from the Introduction",
+        buyLink: "https://link.amazon/B0cTA3N13",
+        content: `
+          <p class="font-sans text-xs uppercase tracking-widest text-brand-700 font-bold">An Honest Question After 45 Years</p>
+          <p>For forty-five years in evangelical ministry, I never questioned Sunday. It was the rhythm of my life: Sunday morning worship, Sunday evening fellowship, mid-week prayer. It was what my professors taught, what my denomination affirmed, and what generations of faithful believers had observed.</p>
+          <p>Then a simple question was presented to me by a sincere believer: <em>"Pastor Mark, where does the New Testament authorize the change of the Sabbath from the seventh day to the first?"</em></p>
+          <p>Confident in my theological training, I opened my Greek New Testament and commentaries to provide the clear proof text. But as the hours turned into days, and days into months of intense, prayerful study, I discovered something unexpected.</p>
+          <p>This book is not an attack. It is not written to judge or divide. It is simply the transparent, scriptural log of one pastor who was willing to let God's Word test his own traditions.</p>
+        `
+      }
+    };
 
-</div><!-- .page -->
+    function openExcerptModal(key) {
+      const data = excerpts[key];
+      if (!data) return;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalCategory').textContent = data.category;
+      document.getElementById('modalContent').innerHTML = data.content;
+      document.getElementById('modalBuyLink').href = data.buyLink;
+      document.getElementById('excerptModal').classList.remove('hidden');
+    }
+
+    function closeExcerptModal() {
+      document.getElementById('excerptModal').classList.add('hidden');
+    }
+
+    // Close on backdrop click or ESC
+    document.getElementById('excerptModal').addEventListener('click', (e) => {
+      if (e.target.id === 'excerptModal') closeExcerptModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeExcerptModal();
+    });
+  </script>
 
 </body>
 </html>
