@@ -202,7 +202,6 @@ figcaption {
   max-width: 36em; font-size: 16px; line-height: 1.6; color: var(--ink);
 }
 .book-note a { border-bottom: 1px solid var(--rule-dark); }
-.book-fine { max-width: 40em; font-size: 14px; line-height: 1.62; color: var(--muted); }
 
 /* the study guide sits on the raised ground, edge to edge of the column */
 .guide {
@@ -303,6 +302,10 @@ figcaption {
   margin: 0; max-width: 26em;
   font-family: var(--serif); font-weight: 300;
   font-size: 26px; line-height: 1.44; color: var(--ink);
+}
+.contact-note {
+  margin: 22px 0 0; max-width: 30em;
+  font-size: 15px; line-height: 1.6; color: var(--soft-ink);
 }
 .contact form { display: flex; flex-direction: column; gap: 20px; }
 .field { display: flex; flex-direction: column; gap: 7px; }
