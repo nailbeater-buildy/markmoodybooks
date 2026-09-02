@@ -14,7 +14,8 @@
   --muted:      #8C857E;   /* captions, fine print */
   --oxblood:    #5A1F1C;   /* THE one colour: rules, links, buttons, the field */
   --oxblood-lt: #7A2E28;   /* book subtitles, small emphasis */
-  --radius:     3px;       /* buttons, fields, photographs — never covers */
+  --radius:     3px;       /* buttons, fields — never covers */
+  --photo-radius: 14px;    /* portraits and the mission photo */
   --rule:       #DDD8CE;   /* minor 1px rules */
   --rule-dark:  #CFC7B9;   /* field + quiet-button borders */
 
@@ -65,11 +66,11 @@ body {
   background: var(--rule);
   pointer-events: none;
 }
-.spine::after {           /* the oxblood segment beside the hero */
+.spine::after {           /* a short oxblood accent near the top of the page */
   content: "";
   position: absolute;
-  top: 120px; left: -1px;
-  width: 3px; height: 180px;
+  top: 104px; left: -1px;
+  width: 3px; height: 150px;
   background: var(--oxblood);
 }
 
@@ -97,9 +98,7 @@ em { font-style: italic; }
 .book-label-red { color: var(--oxblood); }
 
 section > h2,
-.section-head h2,
-.mission h2,
-.lantern h2 {
+.mission h2 {
   font-size: 15px; font-weight: 600;
   letter-spacing: .2em; text-transform: uppercase;
   color: var(--ink);
@@ -130,9 +129,9 @@ section > h2,
 
 /* photographs print black and white */
 figure img,
-.crop img { filter: grayscale(1) contrast(1.06); border-radius: var(--radius); }
+.crop img { filter: grayscale(1) contrast(1.06); border-radius: var(--photo-radius); }
 .mission .crop img { filter: grayscale(1) contrast(1.1) brightness(1.04); }
-.crop { border-radius: var(--radius); }
+.crop { border-radius: var(--photo-radius); overflow: hidden; }
 figcaption {
   margin-top: 10px;
   font-family: var(--serif); font-style: italic;
@@ -149,10 +148,12 @@ figcaption {
   margin-bottom: 0;
 }
 .wordmark {
+  margin: 0;
   font-family: var(--serif);
   font-size: 27px; font-weight: 500; letter-spacing: .02em;
   color: var(--ink);
 }
+.wordmark a { color: inherit; }
 .site-nav { display: flex; gap: 34px; padding-bottom: 5px; }
 .site-nav a {
   font-size: 15px; color: var(--soft-ink);
@@ -160,35 +161,9 @@ figcaption {
 }
 .site-nav a:hover { color: var(--oxblood); border-bottom-color: var(--oxblood); }
 
-/* ---------- hero -------------------------------------------- */
-
-.hero {
-  display: grid; grid-template-columns: 1fr 268px; gap: 64px;
-  align-items: start;
-  max-width: var(--page); margin: 0 auto;
-  padding: 64px var(--margin-r) 72px var(--margin-l);
-}
-.hero h1 {
-  font-size: 76px; line-height: 1.02; letter-spacing: -.018em;
-  text-wrap: balance;
-}
-.hero .lede {
-  margin: 34px 0 0; max-width: 33em;
-  font-size: 19px; line-height: 1.66; color: var(--soft-ink);
-}
-.hero-portrait { margin: 0; }
-.hero-portrait img { display: block; width: 100%; height: 300px; object-fit: cover; object-position: 38% 30%; }
-.hero-portrait figcaption { font-size: 12px; }
-
 /* ---------- books ------------------------------------------- */
 
-.books { max-width: var(--page); margin: 0 auto; padding: 0 var(--margin-r) 0 var(--margin-l); }
-.books::before { content: ""; display: block; height: 1px; background: var(--rule); }
-.section-head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  padding: 52px 0 40px;
-}
-.section-head .count { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--muted); }
+.books { max-width: var(--page); margin: 0 auto; padding: 64px var(--margin-r) 0 var(--margin-l); }
 
 .book, .guide { display: grid; grid-template-columns: 224px 1fr; gap: 56px; }
 .book { padding: 56px 0; }
@@ -354,29 +329,19 @@ figcaption {
 }
 .contact button:hover { background: var(--ink); border-color: var(--ink); }
 
-/* ---------- Lantern Watch ----------------------------------- */
+/* ---------- Lantern Watch (one-line note) ------------------- */
 
 .lantern {
   max-width: var(--page); margin: 0 auto;
-  padding: 60px var(--margin-r) 64px var(--margin-l);
+  padding: 24px var(--margin-r) 24px var(--margin-l);
   border-top: 1px solid var(--rule);
 }
-.lantern h2 { margin-bottom: 32px; }
-.lantern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.lantern .book-label { margin-bottom: 4px; }
-.lantern h3 {
-  max-width: 19em;
-  font-size: 31px; line-height: 1.16; letter-spacing: -.01em;
+.lantern p {
+  margin: 0; max-width: 60em;
+  font-size: 14px; line-height: 1.6; color: var(--muted);
 }
-.lantern p { margin: 16px 0 0; max-width: 34em; color: var(--soft-ink); }
-.lantern-list {
-  margin: 0 0 26px; padding: 0; list-style: none;
-  border-top: 1px solid var(--rule);
-}
-.lantern-list li {
-  padding: 11px 0; border-bottom: 1px solid var(--rule);
-  font-size: 16px; color: var(--soft-ink);
-}
+.lantern strong { color: var(--soft-ink); font-weight: 600; }
+.lantern a { border-bottom: 1px solid var(--rule-dark); }
 
 /* ---------- footer ------------------------------------------ */
 
@@ -398,7 +363,7 @@ figcaption {
 
   body { font-size: 16px; background: var(--paper); }
   .page { border: 0; box-shadow: none; min-height: 0; }
-  .spine::after { top: 74px; height: 96px; }
+  .spine::after { top: 150px; height: 90px; }
 
   .masthead { flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: 0; border-bottom: 0; }
   .wordmark { font-size: 21px; padding-bottom: 12px; }
@@ -412,15 +377,11 @@ figcaption {
   }
   .site-nav a { font-size: 14px; }
 
-  .hero { grid-template-columns: 1fr; gap: 0; padding-top: 32px; padding-bottom: 34px; }
-  .hero h1 { font-size: 40px; line-height: 1.06; letter-spacing: -.015em; }
-  .hero-portrait { order: 2; margin: 26px 0 0; }
-  .hero-portrait img { height: 172px; object-position: 38% 28%; }
-  .hero .lede { order: 3; font-size: 17px; }
+  .books { padding-top: 40px; }
 
-  section > h2, .section-head h2, .mission h2, .lantern h2 { font-size: 13px; }
+  section > h2, .mission h2 { font-size: 13px; }
 
-  .book, .guide, .about-grid, .mission-grid, .contact-grid, .lantern-grid {
+  .book, .guide, .about-grid, .mission-grid, .contact-grid {
     grid-template-columns: 1fr; gap: 20px;
   }
   .cover { width: 150px; }
@@ -444,9 +405,6 @@ figcaption {
 
   .contact-lede { font-size: 21px; line-height: 1.46; }
   .contact button { align-self: stretch; padding: 15px 24px; font-size: 15px; }
-
-  .lantern h3 { font-size: 24px; line-height: 1.18; }
-  .lantern .btn { display: block; text-align: left; }
 
   .site-footer { flex-direction: column; gap: 8px; }
   .site-footer a { align-self: flex-start; }
