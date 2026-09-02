@@ -5,3 +5,6 @@ CLAUDE.md
 .DS_Store
 Thumbs.db
 *.swp
+
+# Local design demo — never deploy
+/demo/
